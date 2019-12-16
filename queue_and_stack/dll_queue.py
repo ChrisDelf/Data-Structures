@@ -15,10 +15,13 @@ class Queue:
 
 
     def dequeue(self):
-        if self.size > 0:
-            self.size -=1
-            return self.storage.pop()
-
+        # if self.size > 0:
+        #     self.size -= 1
+        #     print(self.storage.pop(0))
+        #     return self.storage.pop(0)
+        if self.storage:
+            self.size -= 1
+            return self.storage.pop(0)
 
     def len(self):
         return self.size
