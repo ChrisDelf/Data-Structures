@@ -60,8 +60,14 @@ class BinarySearchTree:
     def get_max(self):
         # if right exists, got right
         # otherwise return self.value
+        current_node = self
+        while current_node.right is not None:
 
-        pass
+
+                current_node = current_node.right
+        return current_node.value
+
+
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
