@@ -10,7 +10,7 @@ class LRUCache:
     def __init__(self, limit=10):
         self.max = limit
         self.list = DoublyLinkedList()
-        self.storage = dict()
+        self.storage = {}
 
 
     """
@@ -21,14 +21,14 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        # looking at the beginning
-        current_item = self.list.head
-        while current_item:
-            if current_item.value == key:
-                #placing our item to the front
-                self.list.move_to_front(current_item)
-            return self.storage[key]
+        current = self.list.head
+        while current:
+            if current.value == key:
+                self.list.move_to_front(current)
+                return self.storage[key]
+            current = current.next
         return None
+
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -41,16 +41,18 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        # first we need to find the key value pair in the list
+
         if key in self.storage:
             self.storage[key] = value
             self.get(key)
             return
-        if len(self.list) >= self.max:
-            self.storage.pop(self.list.remove_from_tail())
+
+        elif len(self.list) >= self.max:
+               self.storage.pop(self.list.remove_from_tail())
 
         self.list.add_to_head(key)
         self.storage[key] = value
+
 
 
 
